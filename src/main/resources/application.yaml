@@ -12,14 +12,25 @@ spring:
       # 默认模型：qwen-turbo（轻量版），可选qwen-plus（增强版）、qwen-max（旗舰版）
       model: qwen-turbo
       # 请求超时时间
-      timeout: 30000
+      timeout: 60000
+      # 连接超时时间
+      connect-timeout: 60000
+      # 读取超时时间
+      read-timeout: 120000
+      # 写入超时时间
+      write-timeout: 60000
 # MyBatis-Plus配置
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.jam.demo.entity
+  type-aliases-package: com.learn.springailearn.domain
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted  # 逻辑删除字段
+      logic-delete-value: 1           # 逻辑删除值
+      logic-not-delete-value: 0       # 逻辑未删除值
 # Swagger3配置
 springdoc:
   api-docs:
@@ -27,9 +38,9 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /swagger-ui.html
-  packages-to-scan: com.jam.demo.controller
+  packages-to-scan: com.learn.springailearn.controller
 # 日志配置
 logging:
   level:
-    com.jam.demo: debug
+    com.learn.springailearn: debug
     org.springframework.ai: debug
