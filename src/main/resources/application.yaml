@@ -1,0 +1,35 @@
+spring:
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysqlDatasource}:3306/spring_ai_demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: ${mysqlPassword}
+  # Spring AI Alibaba 通义千问配置
+  ai:
+    dashscope:
+      api-key: ${env.DASHSCOPE_API_KEY}
+      # 默认模型：qwen-turbo（轻量版），可选qwen-plus（增强版）、qwen-max（旗舰版）
+      model: qwen-turbo
+      # 请求超时时间
+      timeout: 30000
+# MyBatis-Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.jam.demo.entity
+# Swagger3配置
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  packages-to-scan: com.jam.demo.controller
+# 日志配置
+logging:
+  level:
+    com.jam.demo: debug
+    org.springframework.ai: debug
